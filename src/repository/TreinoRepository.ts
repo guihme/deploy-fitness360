@@ -29,8 +29,6 @@ export class TreinoRepository {
       relations: ['exercicios'],
     });
 
-    console.log('TreinosEntity: ', TreinosORM[0].exercicios);
-
     const TreinosEntity: Treino[] = [];
     for (const TreinoORM of TreinosORM) {
       const TreinoEntity = TreinoORM.export();

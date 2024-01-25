@@ -31,12 +31,6 @@ class CreateTreinoProps {
     required: false,
   })
   numeroExercicios?: number;
-
-  @ApiProperty({
-    type: [ExerciseSchema],
-    required: false,
-  })
-  exercises?: ExerciseSchema[];
 }
 
 export const BodyCreateTreinoOptions: ApiBodyOptions = {
