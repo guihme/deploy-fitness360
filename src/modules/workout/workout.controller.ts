@@ -29,10 +29,10 @@ export class TreinoController {
       return;
     }
 
-    let treinos = result.getValue();
-    let treinosDTO: TreinoDTO[] = [];
+    const treinos = result.getValue();
+    const treinosDTO: TreinoDTO[] = [];
 
-    for (let treino of treinos) {
+    for (const treino of treinos) {
       treinosDTO.push(treino.toDTO());
     }
 

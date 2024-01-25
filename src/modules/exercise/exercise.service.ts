@@ -16,10 +16,10 @@ export class ExercicioService {
       return created;
     }
     console.log(data);
-    
+
     const saved = await this.exercicioRepository.save(created.getValue());
     console.log(saved);
-    
+
     if (saved.isFailure) {
       return Result.fail(new Error('Error saving Exercicio data.'));
     }
@@ -39,7 +39,7 @@ export class ExercicioService {
     data: CriarExercicioProps,
     id: string,
   ): Promise<Result<Exercicio>> {
-    let exercicio = await this.findById(id);
+    const exercicio = await this.findById(id);
 
     if (exercicio.isFailure) {
       return Result.fail(exercicio.error);
@@ -50,7 +50,7 @@ export class ExercicioService {
       ...data,
     };
 
-    let build = Exercicio.build(ExercicioDTO);
+    const build = Exercicio.build(ExercicioDTO);
 
     if (build.isFailure) {
       return Result.fail(build.error);

@@ -1,6 +1,12 @@
 import { ExercicioDTO } from '../../DTO';
 import { Exercicio } from '../../entity';
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { ORMTreino } from './ORMtreino';
 
 @Entity('exercicio')
@@ -33,7 +39,7 @@ export class ORMExercicio {
   exercicioConcluido?: boolean;
 
   @ManyToOne(() => ORMTreino, (treino) => treino, {
-    eager: false
+    eager: false,
   })
   @JoinColumn({ name: 'treinoId' })
   @Column()
@@ -56,8 +62,8 @@ export class ORMExercicio {
   }
 
   export(): Exercicio {
-    console.log("this.treinoId", this.treinoId);
-    
+    console.log('this.treinoId', this.treinoId);
+
     const retrievedData: ExercicioDTO = {
       id: this.id,
       urlCapa: this.urlCapa,

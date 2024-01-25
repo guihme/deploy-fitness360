@@ -13,7 +13,7 @@ export class ExercicioRepository {
   ) {}
 
   async save(data: Exercicio): Promise<Result<void>> {
-    try {      
+    try {
       await this.repository.save(ORMExercicio.import(data));
 
       return Result.ok();
@@ -27,8 +27,7 @@ export class ExercicioRepository {
 
   async all(): Promise<Result<Exercicio[]>> {
     const ExerciciosORM = await this.repository.find();
-    console.log("ExerciciosORM: ", ExerciciosORM);
-
+    console.log('ExerciciosORM: ', ExerciciosORM);
 
     const ExerciciosEntity: Exercicio[] = [];
     for (const ExercicioORM of ExerciciosORM) {

@@ -35,7 +35,7 @@ export class TreinoService {
   }
 
   async update(data: CriarTreinoProps, id: string): Promise<Result<Treino>> {
-    let treino = await this.findById(id);
+    const treino = await this.findById(id);
 
     if (treino.isFailure) {
       return Result.fail(treino.error);
@@ -46,7 +46,7 @@ export class TreinoService {
       ...data,
     };
 
-    let build = Treino.build(TreinoDTO);
+    const build = Treino.build(TreinoDTO);
 
     if (build.isFailure) {
       return Result.fail(build.error);

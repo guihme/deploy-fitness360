@@ -37,7 +37,6 @@ export class TreinoRepository {
       TreinosEntity.push(TreinoEntity);
     }
 
-
     return Result.ok(TreinosEntity);
   }
 

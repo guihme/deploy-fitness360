@@ -29,10 +29,10 @@ export class ExercicioController {
       return;
     }
 
-    let exercicios = result.getValue();
-    let exerciciosDTO: ExercicioDTO[] = [];
+    const exercicios = result.getValue();
+    const exerciciosDTO: ExercicioDTO[] = [];
 
-    for (let exercicio of exercicios) {
+    for (const exercicio of exercicios) {
       exerciciosDTO.push(exercicio.toDTO());
     }
 

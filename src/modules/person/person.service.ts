@@ -32,7 +32,7 @@ export class PessoaService {
   }
 
   async update(data: CriarPessoaProps, id: string): Promise<Result<Pessoa>> {
-    let pessoa = await this.findById(id);
+    const pessoa = await this.findById(id);
 
     if (pessoa.isFailure) {
       return Result.fail(pessoa.error);
@@ -43,7 +43,7 @@ export class PessoaService {
       ...data,
     };
 
-    let build = Pessoa.build(pessoaDTO);
+    const build = Pessoa.build(pessoaDTO);
 
     if (build.isFailure) {
       return Result.fail(build.error);

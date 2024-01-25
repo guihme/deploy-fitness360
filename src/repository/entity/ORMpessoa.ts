@@ -41,7 +41,7 @@ export class ORMPessoa {
       peso: this.peso,
       idade: this.idade,
       sexo: this.sexo,
-      imc: this.imc
+      imc: this.imc,
     };
 
     const buildPerson = Pessoa.build(retrievedData);

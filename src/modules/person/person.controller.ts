@@ -29,10 +29,10 @@ export class PessoaController {
       return;
     }
 
-    let pessoas = result.getValue();
-    let pessoasDTO: PessoaDTO[] = [];
+    const pessoas = result.getValue();
+    const pessoasDTO: PessoaDTO[] = [];
 
-    for (let pessoa of pessoas) {
+    for (const pessoa of pessoas) {
       pessoasDTO.push(pessoa.toDTO());
     }
 

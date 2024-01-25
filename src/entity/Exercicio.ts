@@ -77,8 +77,8 @@ export class Exercicio {
   }
 
   static validate(data: ExercicioProps): Result<ExercicioProps> {
-    console.log("validate: ", data);
-    
+    console.log('validate: ', data);
+
     const exerciseObject = {
       id: Joi.string().guid({ version: 'uuidv4' }),
       urlCapa: Joi.string().optional(),
