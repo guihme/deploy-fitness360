@@ -1,11 +1,6 @@
 import { ApiBodyOptions, ApiProperty } from '@nestjs/swagger';
 
 class CreateExerciseProps {
-  @ApiProperty({
-    example: 'ABC123',
-    required: false,
-  })
-  refExercise?: string;
 
   @ApiProperty({
     example: 'https://example.com/imidade.jpg',
@@ -54,6 +49,12 @@ class CreateExerciseProps {
     required: false,
   })
   exercicioConcluido?: boolean;
+
+  @ApiProperty({
+    example: '8263cd84-0c32-4cbc-803d-b1d413970797',
+    required: true,
+  })
+  treinoId: string;
 }
 
 export const BodyCreateExerciseOptions: ApiBodyOptions = {
