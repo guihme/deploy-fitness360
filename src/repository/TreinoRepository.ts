@@ -41,10 +41,11 @@ export class TreinoRepository {
   }
 
   async findById(id: string): Promise<Result<Treino>> {
-    const TreinoORM = await this.repository.findOne(
-      { id: id },
-      { relations: ['exercises'] },
-    );
+    const TreinoORM = await this.repository.findOne({
+      where: { id: id },
+      relations: ['exercicios'],
+    });
+
     if (!TreinoORM) {
       return Result.fail(new Error('Not found!'));
     }
@@ -53,9 +54,9 @@ export class TreinoRepository {
 
   async delete(id: string): Promise<Result<void>> {
     try {
-      const Treino = await this.repository.findOne({ id: id });
+      const Treino = await this.repository.findOne({ where: { id } });
       if (!Treino) return Result.fail(new Error());
-      await this.repository.delete(Treino);
+      await this.repository.delete({ id: Treino.id });
       return Result.ok<void>();
     } catch (e) {
       if (e instanceof QueryFailedError) {

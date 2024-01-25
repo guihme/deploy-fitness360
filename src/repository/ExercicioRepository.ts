@@ -38,7 +38,7 @@ export class ExercicioRepository {
   }
 
   async findById(id: string): Promise<Result<Exercicio>> {
-    const ExercicioORM = await this.repository.findOne({ id: id });
+    const ExercicioORM = await this.repository.findOne({ where: { id } });
     if (!ExercicioORM) {
       return Result.fail(new Error('Not found!'));
     }
@@ -47,9 +47,9 @@ export class ExercicioRepository {
 
   async delete(id: string): Promise<Result<void>> {
     try {
-      const Exercicio = await this.repository.findOne({ id: id });
+      const Exercicio = await this.repository.findOne({ where: { id } });
       if (!Exercicio) return Result.fail(new Error());
-      await this.repository.delete(Exercicio);
+      await this.repository.delete({ id: Exercicio.id });
       return Result.ok<void>();
     } catch (e) {
       if (e instanceof QueryFailedError) {
