@@ -1,5 +1,5 @@
 import * as Joi from 'joi';
-import { Result } from 'src/shared/result';
+import { Result } from '../shared/result';
 import { v4 as uuidv4 } from 'uuid';
 import { PessoaDTO } from '../DTO';
 
