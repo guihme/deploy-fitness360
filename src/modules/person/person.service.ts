@@ -77,7 +77,7 @@ export class PessoaService {
     const totalDaysOfTrainning =
       Math.floor(data.diasTotais / 4) * data.freqSemanal;
     const totalKcalBurned = totalDaysOfTrainning * 3000;
-    const totalKcalGained = data.kcal + data.diasTotais;
+    const totalKcalGained = (data.kcal - 2400) * data.diasTotais;
     const result = (totalKcalGained - totalKcalBurned) / 7700;
     const oldPeso = Number(pessoaData.peso.replace(/\D/g, ''));
     const altura = Number(pessoaData.altura.replace(/\D/g, '')) / 100;
