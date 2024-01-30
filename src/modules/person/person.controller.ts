@@ -13,7 +13,7 @@ import { Response } from 'express';
 import { CriarPessoaProps } from 'src/entity';
 import { PessoaDTO } from 'src/DTO';
 import { PessoaService } from './person.service';
-import { BodyCreatePessoaOptions } from './person.schema';
+import { BodyCreatePessoaOptions, BodyGemeoOptions } from './person.schema';
 
 @ApiTags('pessoas')
 @Controller('pessoas')
@@ -94,5 +94,28 @@ export class PessoaController {
     }
 
     res.status(200).send();
+  }
+
+  @ApiOperation({ summary: ' estimar imc ' })
+  @ApiBody(BodyGemeoOptions)
+  @Post('/digital-twin')
+  async digitalTwin(
+    @Body()
+    body: {
+      id_pessoa: string;
+      kcal: number;
+      diasTotais: number;
+      freqSemanal: number;
+    },
+    @Res() res: Response,
+  ) {
+    const result = await this.pessoaService.calculateDigitalTwin(body);
+    if (result.isFailure) {
+      res.status(400).send(result.errorValue());
+      return;
+    }
+    const pessoa = result.getValue();
+
+    res.status(200).send(pessoa.toDTO());
   }
 }

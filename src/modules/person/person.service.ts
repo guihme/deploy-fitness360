@@ -61,4 +61,31 @@ export class PessoaService {
   async delete(id: string): Promise<Result<void>> {
     return this.pessoaRepository.delete(id);
   }
+  async calculateDigitalTwin(data: {
+    id_pessoa: string;
+    kcal: number;
+    diasTotais: number;
+    freqSemanal: number;
+  }): Promise<Result<Pessoa>> {
+    const pessoa = await this.pessoaRepository.findById(data.id_pessoa);
+
+    if (pessoa.isFailure) return pessoa;
+
+    const pessoaData: CriarPessoaProps = {
+      ...pessoa.getValue().toDTO(),
+    };
+    const totalDaysOfTrainning =
+      Math.floor(data.diasTotais / 4) * data.freqSemanal;
+    const totalKcalBurned = totalDaysOfTrainning * 3000;
+    const totalKcalGained = data.kcal + data.diasTotais;
+    const result = (totalKcalGained - totalKcalBurned) / 7700;
+    const oldPeso = Number(pessoaData.peso.replace(/\D/g, ''));
+    const altura = Number(pessoaData.altura.replace(/\D/g, '')) / 100;
+    const newPeso = oldPeso + result;
+
+    pessoaData.peso = String(newPeso.toFixed(1)) + 'kg';
+    pessoaData.imc = String((newPeso / (altura * altura)).toFixed(1));
+
+    return Pessoa.create(pessoaData);
+  }
 }
